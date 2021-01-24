@@ -1,9 +1,27 @@
-import { INCREMENT, DECREMENT } from "./actionTypes";
+import {
+  INCREMENT,
+  DECREMENT,
+  CHANGE_THEME,
+  DISABLE_BUTTONS,
+  ENABLE_BUTTONS,
+} from "./actionTypes";
 
-export const increment = () => ({type: INCREMENT})
-export const decrement = () => ({type: DECREMENT})
+export const increment = () => ({ type: INCREMENT });
+export const decrement = () => ({ type: DECREMENT });
+export const changeTheme = (newTheme) => ({
+  type: CHANGE_THEME,
+  payload: newTheme,
+});
+const disableButtons = () => ({
+  type: DISABLE_BUTTONS,
+});
+const enableButtons = () => ({
+  type: ENABLE_BUTTONS,
+});
 export const asyncIncrement = () => (dispatch) => {
-      setTimeout(() => {
-            dispatch(increment())
-      }, 1500)
-}
+  dispatch(disableButtons());
+  setTimeout(() => {
+    dispatch(increment());
+    dispatch(enableButtons());
+  }, 1500);
+};
